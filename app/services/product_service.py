@@ -100,3 +100,15 @@ class ProductService:
     def delete_product(self, product_id: int) -> None:
         if not self.repository.remove(product_id):
             raise NotFoundError(f"Product {product_id} not found")
+
+    def adjust_stock(self, product_id: int, quantity: int) -> dict:
+        record = self.repository.find_by_id(product_id)
+        if record is None:
+            raise NotFoundError(f"Product {product_id} not found")
+        new_stock = record["stock"] + quantity
+        if new_stock < 0:
+            from app.errors import ConflictError
+            raise ConflictError("Stock cannot be negative")
+        updated = self.repository.update(product_id, {"stock": new_stock})
+        return self._to_product(updated)
+

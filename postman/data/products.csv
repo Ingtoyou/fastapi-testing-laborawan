@@ -6,3 +6,6 @@ invalid-empty-name,,100,1,0,400,
 invalid-negative-price,Bad Price,-10,1,0,400,
 invalid-discount-over-100,Bad Discount,100,1,150,400,
 invalid-negative-stock,Bad Stock,100,-1,0,400,
+valid-zero-stock,Zero Stock Item,500,0,0,201,500
+invalid-zero-price,Zero Price Item,0,10,0,400,
+invalid-decimal-stock,Decimal Stock Item,100,2.5,0,400,

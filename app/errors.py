@@ -29,3 +29,11 @@ class NotFoundError(AppError):
 
     def __init__(self, message: str = "Resource not found"):
         super().__init__(message)
+
+
+class ConflictError(AppError):
+    status_code = 409
+
+    def __init__(self, message: str = "Conflict"):
+        super().__init__(message)
+

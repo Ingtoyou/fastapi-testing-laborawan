@@ -39,4 +39,9 @@ def create_product_router(service: ProductService, require_auth) -> APIRouter:
         service.delete_product(parse_id(product_id))
         return Response(status_code=204)
 
+    @router.patch("/{product_id}/stock", dependencies=[Depends(require_auth)])
+    def adjust_stock(product_id: str, payload: dict | None = Body(default=None)):
+        quantity = (payload or {}).get("quantity", 0)
+        return service.adjust_stock(parse_id(product_id), quantity)
+
     return router
